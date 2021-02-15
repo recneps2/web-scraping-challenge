@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Web Scraping Challenge</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+    
+    <div class = "row">
+      <div class = 'col-md-12'>
+        <h2><strong>Latest Mars News</strong></h2>
+        <h3>{{ mars.News_Title }}</h3>
+        <p>
+          {{ mars.News_Para }}
+        </p>
+      </div>
+    </div>
+
+    <div class = 'row'>
+      <div class = 'col-md-8'>
+        <h3><strong>Featured Mars Image</strong></h3>
+          <img src="{{ mars.featured_img }}">
+        </div>
+              
+        
+      
+        <div class = 'col-md-4'>
+          <th><strong>Mars Facts</strong></th>
+          {{ mars.Facts | safe}} 
+        </div>
+      </div>
+    <div class = 'row'>
+
+    <h4 style = text-align:center> <strong>Mars Hemispheres</strong> </h4>
+     {%for hemisphere in mars.Hemisphere_Image_URLS%}
+     <div class = 'col-md-6'>
+       <div class = 'thumbnail'><img src = "{{hemisphere.img_url}}">
+        <div class = 'caption'><h3><strong>{{hemisphere.title}}</strong></h3>
+        </div>
+
+        </div>
+
+     
+    </div>
+    {%endfor%}
+
+  </div> 
+
+</body>
+
+</html>
