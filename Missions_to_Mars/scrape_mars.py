@@ -29,26 +29,14 @@ def scrape_info():
     }
 
     url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
-
     browser.visit(url)
+    time.sleep(1)
+    browser.links.find_by_partial_href("/images").click()
 
     time.sleep(2)
-
-    browser.find_by_id("full_image").click()
-
-    time.sleep(2)
-
-    browser.find_link_by_partial_text("more info").click()
-
-    time.sleep(2)
-
-    soup = BeautifulSoup(browser.html,'html.parser')
-
-    results = soup.find('figure', class_='lede').a.img["src"]
-
-    featured_img = 'https://www.jpl.nasa.gov'+results
-
-    mars["featured_img"] = featured_img
+    soup = BeautifulSoup(browser.html, 'html.parser')
+    featured_image = soup.find(class_='BaseImage').get('src')
+    mars["featured_img"] = featured_image
 
 
     url = 'https://space-facts.com/mars/'
@@ -93,6 +81,8 @@ def scrape_info():
         browser.back()
         
     hemisphere_image_urls
+    
+    browser.quit()
 
     mars["Hemisphere_Image_URLS"] = hemisphere_image_urls
 
